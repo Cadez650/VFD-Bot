@@ -1,3 +1,5 @@
 'npm-debug.log' 
 git rm -r --cached node_modules
 git commit -m 'Remove node_modules'
+git rm -r --cached node_modules
+git commit -am 'ignore node_modules''node_modules' 
