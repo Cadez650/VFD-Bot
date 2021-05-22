@@ -5,3 +5,5 @@ git rm -r --cached node_modules
 git commit -am 'ignore node_modules''node_modules' 
 echo 'npm-debug.log' >> .gitignore
 'npm-debug.log' 
+'npm-debug.log' 
+'node_modules' 
