@@ -1,7 +1,6 @@
 {
   "name": "tutorialbot",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "engines": {
     "node": "12.18.3"
@@ -18,5 +17,16 @@
     "noblox.js": "^4.8.5",
     "trello": "^0.10.0",
     "trello-node-api": "0.0.9"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cadez650/VFD-Bot.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Cadez650/VFD-Bot/issues"
+  },
+  "homepage": "https://github.com/Cadez650/VFD-Bot#readme",
+  "description": ""
 }
