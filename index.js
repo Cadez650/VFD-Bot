@@ -6,8 +6,6 @@ const token = 'ODM4NjEzMTAzODg5MDg4NTg0.YI9pUA.mAJ9701ttxyxUeq78R0vnd2w06k';
 const fs = require('fs')
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync(`./commands`).filter(file => file.endsWith('.js'));
-const Trello = require("trello");
-const trello = new Trello(config.trelloAppKey, config.trelloToken);
 const noblox = require('noblox.js');
 const { report } = require('process');
 const group = 5530436;  
@@ -15,6 +13,9 @@ const rblxToken = '_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someon
 const channel3 = client.channels.cache.find(channel => channel.id === 733476395753275473)
 const BoardID = '60596b5bc2b7a73fdd6eaa46'
 const listID = '60596c1c98b65124e3b3f32f'
+const trelloToken = 'd8718c46a69b0f9ca9b950fb799d19a3'
+const secret = 'e1525c512a86b882cca6eaf2d8be949db99688ee463d641aef0cb8d96927501c'
+const token1 = '0b4b93fcf17cfc0a28bbaf6b106b2ebe1d3d4eabeaa685b503120102ecbad194'
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`)
     console.log("✅ loaded " + file)
@@ -32,15 +33,40 @@ client.on('ready', async() => {
 })
 
 client.on('message', async message => {
-    const channel1 = client.channels.cache.find(channel => channel.id === '839371948902580224')
+    const channel1 = client.channels.cache.find(channel => channel.id === '839609030955237429')
     const placeInfo = await noblox.getPlaceInfo(4764801869)
     const rblx1 = require('noblox.js');
     const args = message.content.slice(prefix.length).trim().split(' ');
     const msg = message.content.toLowerCase()
+    if(msg === `${prefix}reactionroles`) {
+        client.commands.get('reactionroles').execute(message,client,Discord)
+    }
     if (message.channel.type === 'dm') return;
     if (message.author.bot) return;
     if (message.content.toLowerCase().includes(`sxo`)) {
         message.channel.send("one of the best in the buissness")
+    }
+    if(message.content.toLowerCase() === 'reset') {
+        message.channel.send('Reset_Law crushes his enemies with the power dripping off his name, he strikes fear in anyone who crosses him. A MIGHTY man with a white moustache, he is a legend in all communities...')
+    }
+    if (message.content.toLowerCase().startsWith(`${prefix}activitystrike`)) {
+        if (message.member.roles.cache.some((role) => role.name === 'Bot Developer')) {
+            if (message.mentions.users.first() && args[2] && args[3]) {
+                const IA_Channel = client.channels.cache.find(channel => channel.id === '733476395753275473')
+                const discId = message.mentions.users.first()
+                let nickname = args[1]
+                const timeInactivity = args[3]
+                const username = args[2]
+                const id = await noblox.getIdFromUsername(username)
+                const rank = await noblox.getRankNameInGroup(group, id)
+                discId.send(`You have received a strike in Vancouver Fire Department for failing to submit a log of 1 hour. You may submit a log before 12 AM EST. Reminder: 1 Hour of Patrol time each week. After 3 strikes you will be terminated.`)
+                const adminLogs = client.channels.cache.find(channel => channel.id === '839609030955237429')
+                adminLogs.send(`${nickname} has been given a activity strike from: ${await message.member.nickname}`)
+                IA_Channel.send(`${rank} ${username} Has been striked for inactivity. Total strikes: ${timeInactivity}`)
+            }
+        } else {
+            message.reply("INVALID PERMS")
+        }
     }
     if (message.content.toLowerCase().startsWith(`${prefix}restart`)) {
         client.commands.get("restart").execute(client, Discord, message, config)
@@ -59,40 +85,13 @@ client.on('message', async message => {
             message.reply("Proivde a username!")
         }
     }
-    if (message.content.toLowerCase().includes(`canadian`)) {
-        message.channel.send("One of the best Captains within VFD. :salutes:")
-    }
-    if(message.content.toLowerCase() === "sus") {
-        message.channel.send()
-    }
-    if(message.content.toLowerCase().includes("jack")) {
-        message.channel.send("Sexiest captain in VFD")
-    }
     // if(message.content.toLowerCase().includes("porn") || (message.content.toLowerCase().includes("cum"))) {
     //     message.delete()
     //     const adminLogs = client.channels.cache.find(channel => channel.id === '839609030955237429')
     //     adminLogs.send(message.member.nickname + " has sent NSFW. Message: " + `||${message.content}||`)
     // }
     const channel2 = client.channels.cache.find(channel => channel.id === '839609030955237429')
-    if (message.content.toLowerCase().startsWith(`${prefix}activitystrike`)) {
-        if (message.mentions.users.first() && args[2] && args[3]) {
-            if (message.member.roles.cache.some((role) => role.name === 'Captain') || (message.member.roles.cache.some((role) => role.name === 'HICCOM') || (message.member.id === '323687110550749186') || (message.member.id === '444709271213572099'))) {
-            const IA_Channel = client.channels.cache.find(channel => channel.id === '733476395753275473')
-            const discId = message.mentions.users.first()
-            let nickname = args[1]
-            const timeInactivity = args[3]
-            const username = args[2]
-            const id = await noblox.getIdFromUsername(username)
-            const rank = await noblox.getRankNameInGroup(group, id)
-            discId.send(`You have received a strike in Vancouver Fire Department for failing to submit a log of 1 hour. You may submit a log before 12 AM EST. Reminder: 1 Hour of Patrol time each week. After 3 strikes you will be terminated.`)
-            const adminLogs = client.channels.cache.find(channel => channel.id === '839609030955237429')
-            adminLogs.send(`${nickname} has been given a activity strike from: ${await message.member.nickname}`)
-            IA_Channel.send(`${rank} ${username} Has been striked for inactivity. Total strikes: ${timeInactivity}`)
-        } else {
-            message.reply("INVALID PERMS")
-        }
-    }
-}
+  
     if (message.content.toLowerCase().startsWith(`${prefix}blacklist`)) {
         if (message.member.roles.cache.some((role) => role.name === 'Internal Affairs')) {
             const adminLogs = client.channels.cache.find(channel => channel.id === '733476395753275473')
@@ -187,9 +186,11 @@ client.on('message', async message => {
                 const adminLogs = client.channels.cache.find(channel => channel.id === '733476395753275473')
                 adminLogs.send(rank + " " + args[2] + " has placed under investigation. During this time he is ordered not to represent the department in any way and must call 10-7 immediately.")
                 message.reply(rank + " " + args[1] + '  has been placed under investagation successfully!')
+                channel1.send(args[2] + " was UI'ed by " + message.member.nickname)
                 if (rank === "Battalion Chief" || rank === "Assistant Chief" || rank === "Deputy Chief" || rank === "Fire Chief" || rank === "District Chief") {
                     adminLogs.send('Due to ' + rblxName + " being a HICOMM member this investagation will be done by HICOMM.")
                 }
+
             } else {
                 message.reply("Ping/mention the user!")
             }
@@ -206,6 +207,7 @@ const Captain = message.guild.roles.cache.find(role => role.id === '739567509291
             const rank = args.slice(2).join(" ") || args[1];
             const name = args[1]
             const ID = await noblox.getIdFromUsername(name)
+            channel1.send(name + " was ranked to: " + rank + " by: " + message.member.nickname )
             await noblox.setRank(group, ID, rank)
              message.channel.send('Set ' + name + " rank to " + await noblox.getRankNameInGroup(group, ID))
         }
@@ -303,7 +305,7 @@ else if (message.content.toLowerCase().startsWith(`${prefix}suspend`)) {
     }
 } else if (message.content.toLowerCase().startsWith(`${prefix}promote`)) {
 
-    if (message.member.roles.cache.some((role) => role.name === 'HICOMM')) {
+    if (message.member.roles.cache.some((role) => role.name === 'Captain')) {
             // await noblox.handleJoinRequest(group, 663192878, true)
             const name = args[1]
             const ID = await noblox.getIdFromUsername(name)
