@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require('./config.json')
 const client = new Discord.Client()
 const prefix = '.';
-const token = 'ODM4NjEzMTAzODg5MDg4NTg0.YI9pUA.mAJ9701ttxyxUeq78R0vnd2w06k';
+const token = 'ODM4NjEzMTAzODg5MDg4NTg0.YI9pUA.TmK_SKRGyIBc6ow23eIU6v8PI8o';
 const fs = require('fs')
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync(`./commands`).filter(file => file.endsWith('.js'));
