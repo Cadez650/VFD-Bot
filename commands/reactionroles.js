@@ -3,6 +3,7 @@
 module.exports = {
     name: "reactionroles",
  async execute(message,client,Discord) {
+        const Role1 = message.guild.roles.cache.get("846896515977183234");
         const channel = '762498219841814550';
         const role = '846894148904026132'
         const emoji = '☑️'
